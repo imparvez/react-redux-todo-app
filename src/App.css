@@ -1,0 +1,47 @@
+.todo {
+  padding: 15px;
+  max-width: 350px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.add input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin: 0 10px;
+  max-width: 250px;
+  width: 100%;
+}
+
+.add input:focus,
+.add input:active {
+  outline: none;
+}
+
+button[type="primary"] {
+  padding: 10px 30px;
+  border-radius: 4px;
+  outline: none;
+}
+
+button[type="primary"]:focus,
+button[type="primary"]:active {
+  outline: none;
+}
+
+.todos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
