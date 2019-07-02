@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import {
 	addTodo,
 	completed,
-	deleteTodo
+	deleteTodo,
+	updateTodo,
 } from './actions/actionCreators'
 
 import { Icon, Checkbox } from "antd";
@@ -33,7 +34,10 @@ const App = props => {
 							// Key Up event for enter key
 							if(e.keyCode === 13) {
 								setText("");
-								text && buttonType === "Add" && props.addTodo(text)
+								text && buttonType === "Add"
+									? props.addTodo(text)
+									: props.updateTodo(edit.id, text);
+								buttonType === "Update" && setButtonType("Add")
 							}
 						}}
 					/>
@@ -41,7 +45,10 @@ const App = props => {
 						type="primary"
 						onClick={() => {
 							setText("")
-							text && buttonType === "Add" && props.addTodo(text)
+							text && buttonType === "Add"
+								? props.addTodo(text)
+								: props.updateTodo(edit.id, text)
+							buttonType === "Update" && setButtonType("Add")
 						}}
 					>
 						{buttonType}
@@ -74,7 +81,17 @@ const App = props => {
 									>
 										{todo.text}
 									</span>
-									<Icon type="edit" className="action edit" />
+									<Icon
+										type="edit"
+										className="action edit"
+										onClick={() => {
+											setButtonType("Update")
+											setText(todo.text)
+											setEdit({
+												id: todo.id
+											})
+										}}
+									/>
 									<Icon type="delete" className="action delete" onClick={() => {
 										props.deleteTodo(todo.id)
 									}}/>
@@ -94,7 +111,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 	addTodo: value => dispatch(addTodo(value)),
 	completed: value => dispatch(completed(value)),
-	deleteTodo: value => dispatch(deleteTodo(value))
+	deleteTodo: value => dispatch(deleteTodo(value)),
+	updateTodo: (id, text) => dispatch(updateTodo(id, text))
 })
 
 
