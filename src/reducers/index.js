@@ -4,6 +4,7 @@ import {
     ADD_TODO,
     COMPLETED,
     DELETE_TODO,
+    UPDATE_TODO,
 } from '../actions/actionTypes'
 
 const initialState = {
@@ -33,6 +34,14 @@ const rootReducer = (state = initialState, action) => {
         case DELETE_TODO:
             const deleteTodo = state.todos.filter(todo => todo.id !== action.payload)
             return { ...state, todos: deleteTodo }
+        case UPDATE_TODO:
+            const updatedTodo = state.todos.map(todo => 
+                todo.id === action.payload.id
+                    ? { ...todo, text: action.payload.text }
+                    : todo    
+            )
+
+            return { ...state, todos: updatedTodo }
         default:
             return state
     }
